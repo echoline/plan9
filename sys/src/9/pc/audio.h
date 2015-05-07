@@ -1,23 +1,22 @@
-/* 
- * This file is part of the UCB release of Plan 9. It is subject to the license
- * terms in the LICENSE file found in the top-level directory of this
- * distribution and at http://akaros.cs.berkeley.edu/files/Plan9License. No
- * part of the UCB release of Plan 9, including this file, may be copied,
- * modified, propagated, or distributed except according to the terms contained
- * in the LICENSE file.
- */
 
-enum
-{
-	Bufsize	= 1024,	/* 5.8 ms each, must be power of two */
-	Nbuf		= 128,	/* .74 seconds total */
-	Dma		= 6,
-	IrqAUDIO	= 7,
-	SBswab	= 0,
+typedef struct Audio Audio;
+struct Audio {
+	Audio *next;
+	char *name;
+	void *ctlr;
+	void *mixer;
+	void (*attach)(Audio *);
+	long (*read)(Audio *, void *, long, vlong);
+	long (*write)(Audio *, void *, long, vlong);
+	long (*volread)(Audio *, void *, long, vlong);
+	long (*volwrite)(Audio *, void *, long, vlong);
+	void (*close)(Audio *);
+	long (*ctl)(Audio *, void *, long, vlong);
+	long (*status)(Audio *, void *, long, vlong);
+	long (*buffered)(Audio *);
+	int ctlrno;
 };
 
-#define seteisadma(a, b)	dmainit(a, Bufsize);
-#define UNCACHED(type, v)	(type*)((ulong)(v))
-
-#define Int0vec
-#define setvec(v, f, a)		intrenable(v, f, a, BUSUNKNOWN, "audio")
+void addaudiocard(char *name, int (*probefn)(Audio *));
+void ac97mixreset(Audio *, void (*wr)(Audio*,int,ushort), ushort (*rr)(Audio*,int));
+int ac97hardrate(Audio *adev, int rate);

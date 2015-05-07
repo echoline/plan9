@@ -71,22 +71,24 @@ readelfhdr(Chan *c, ulong, Execvals *evp)
 static int
 readelf64hdr(Chan *c, ulong, Execvals *evp)
 {
-	E64hdr ehdr;
-	P64hdr phdrs[3];
+	return -1;
 
-	c->offset = 0;			/* back up */
-	readn(c, &ehdr, sizeof ehdr);
-	if(memcmp(&ehdr.ident[MAG0], elfident, sizeof elfident) != 0 ||
-	    ehdr.ident[CLASS] != ELFCLASS64)
-		return -1;
+//	E64hdr ehdr;
+//	P64hdr phdrs[3];
 
-	/* get textsize and datasize from Phdrs */
-	readn(c, phdrs, sizeof phdrs);
-	evp->entry = ehdr.elfentry;
-	evp->textsize = phdrs[0].filesz;
-	evp->datasize = phdrs[1].filesz;
-	c->offset = ROUNDUP(Ehdr64sz + 3*Phdr64sz, 16);	/* position for text */
-	return 0;
+//	c->offset = 0;			/* back up */
+//	readn(c, &ehdr, sizeof ehdr);
+//	if(memcmp(&ehdr.ident[MAG0], elfident, sizeof elfident) != 0 ||
+//	    ehdr.ident[CLASS] != ELFCLASS64)
+//		return -1;
+
+//	/* get textsize and datasize from Phdrs */
+//	readn(c, phdrs, sizeof phdrs);
+//	evp->entry = ehdr.elfentry;
+//	evp->textsize = phdrs[0].filesz;
+//	evp->datasize = phdrs[1].filesz;
+//	c->offset = ROUNDUP(Ehdr64sz + 3*Phdr64sz, 16);	/* position for text */
+//	return 0;
 }
 
 static void

@@ -1,4 +1,4 @@
-CONF=pc
+CONF=pcf
 CONFLIST=pc pccpu pcf pcdisk # pccpuf pcauth
 CRAPLIST=pccd pcflop
 EXTRACOPIES=
