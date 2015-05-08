@@ -72,7 +72,7 @@ main()
 
 	einit (Emouse);
 
-	back = allocimagemix (display, DGreen, DWhite);
+	back = allocimagemix (display, 0x88FF88FF, DWhite);
 	knob = allocimage (display, Rect(0,0,1,1), CMAP8, 1, 0x008800FF);
 	rim = allocimage (display, Rect(0,0,1,1), CMAP8, 1, 0x004400FF);
 
@@ -110,6 +110,8 @@ main()
 				fclose (f);
 
 				redraw(screen);
+
+				sleep(50);
 			}
 		}
 	}
