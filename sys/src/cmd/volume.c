@@ -1,6 +1,5 @@
 #include <u.h>
 #include <libc.h>
-#include <stdio.h>
 #include <draw.h>
 #include <event.h>
 
@@ -49,23 +48,21 @@ main()
 	int key;
 	Mouse m;
 	Event e;
-	FILE *f;
+	int f;
 	char buf[256];
 	char *ptr;
 	Point p;
 	double rad;
 	int d;
 
-	f = fopen("/dev/volume", "r");
-	if (f == NULL)
+	f = open("/dev/volume", ORDWR);
+	if (f < 0)
 		sysfatal ("open volume failed");
 
-	fgets(buf, sizeof(buf), f);
+	read (f, buf, sizeof(buf));
 	strtok(buf, " ");
-	ptr = strtok(NULL, " ");
+	ptr = strtok(nil, " ");
 	volume = atoi(ptr);
-
-	fclose (f);
 
 	if (initdraw(0, 0, "volume") < 0)
 		sysfatal ("initdraw failed");
@@ -101,13 +98,7 @@ main()
 
 				volume = d;
 
-				f = fopen("/dev/volume", "w");
-				if (f == nil)
-					sysfatal ("open volume failed");
-
-				fprintf (f, "%d\n", volume);
-
-				fclose (f);
+				fprint (f, "%d\n", volume);
 
 				redraw(screen);
 
