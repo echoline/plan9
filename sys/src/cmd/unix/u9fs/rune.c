@@ -17,6 +17,9 @@ enum
 	Bit2	= 5,
 	Bit3	= 4,
 	Bit4	= 3,
+	Bit5	= 2,
+
+	Runemax		= 0x10FFFF,
 
 	T1	= ((1<<(Bit1+1))-1) ^ 0xFF,	/* 0000 0000 */
 	Tx	= ((1<<(Bitx+1))-1) ^ 0xFF,	/* 1000 0000 */
