@@ -79,6 +79,8 @@ link
 	usbohci
 	usbehci		usbehcipc
 
+	audioac97	audioac97mix
+
 misc
 	archmp		mp apic mpacpi
 	mtrr
