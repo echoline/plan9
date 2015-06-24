@@ -105,7 +105,7 @@ main()
 			}
 			break;
 		default:
-			fclose(f);
+			close(f);
 			f = open("/dev/volume", ORDWR);
 
 			read (f, buf, sizeof(buf));

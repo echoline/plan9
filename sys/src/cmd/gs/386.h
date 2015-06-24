@@ -1,12 +1,3 @@
-/* 
- * This file is part of the UCB release of Plan 9. It is subject to the license
- * terms in the LICENSE file found in the top-level directory of this
- * distribution and at http://akaros.cs.berkeley.edu/files/Plan9License. No
- * part of the UCB release of Plan 9, including this file, may be copied,
- * modified, propagated, or distributed except according to the terms contained
- * in the LICENSE file.
- */
-
 /* Parameters derived from machine and compiler architecture. */
 /* This file is generated mechanically by genarch.c. */
 
@@ -42,8 +33,8 @@
 
 	 /* ---------------- Cache sizes ---------------- */
 
-#define ARCH_CACHE1_SIZE 131072
-#define ARCH_CACHE2_SIZE 4194304
+#define ARCH_CACHE1_SIZE 4096
+#define ARCH_CACHE2_SIZE 32768
 
 	 /* ---------------- Miscellaneous ---------------- */
 
