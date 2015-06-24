@@ -154,7 +154,7 @@ main(int argc, char *argv[])
 		p2 = savedfile;
 		while(*p2++ = *p1++)
 			;
-		globp = L"a";
+		globp = (uint*)L"a";
 	} else
 	if(*argv) {
 		p1 = *argv;
@@ -162,7 +162,7 @@ main(int argc, char *argv[])
 		while(*p2++ = *p1++)
 			if(p2 >= &savedfile[sizeof(savedfile)])
 				p2--;
-		globp = L"r";
+		globp = (uint*)L"r";
 	}
 	zero = malloc((nlall+5)*sizeof(int*));
 	tfname = mktemp("/tmp/eXXXXX");

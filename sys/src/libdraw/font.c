@@ -21,13 +21,13 @@ cachechars(Font *f, char **ss, Rune **rr, ushort *cp, int max, int *wp, char **s
 {
 	int i, th, sh, h, ld, w, rw, wid, nc;
 	char *sp;
-	Rune r, *rp, vr;
+	Rune r, *rp = nil, vr;
 	ulong a;
 	Cacheinfo *c, *tc, *ec;
 
 	if(ss){
 		sp = *ss;
-		rp = L"";
+		rp = (uint*)L"";
 	}else{
 		sp = "";
 		rp = *rr;

@@ -44,9 +44,7 @@ eresized(int new)
 
 void
 main()
-{
-	int key;
-	Mouse m;
+{	Mouse m;
 	Event e;
 	int f;
 	char buf[256];
@@ -54,6 +52,7 @@ main()
 	Point p;
 	double rad;
 	int d;
+	int Etimer;
 
 	f = open("/dev/volume", ORDWR);
 	if (f < 0)
@@ -68,6 +67,7 @@ main()
 		sysfatal ("initdraw failed");
 
 	einit (Emouse);
+	Etimer = etimer(0, 1000);
 
 	back = allocimagemix (display, 0x88FF88FF, DWhite);
 	knob = allocimage (display, Rect(0,0,1,1), CMAP8, 1, 0x008800FF);
@@ -76,9 +76,8 @@ main()
 	redraw(screen);
 
 	for (;;) {
-		key = event(&e);
-
-		if(key == Emouse) {
+		switch(eread(Emouse|Etimer, &e)){
+		case Emouse:
 			m = e.mouse;
 			if(m.buttons & 1) {
 				p = subpt(m.xy, divpt(addpt(screen->r.min, screen->r.max), 2));
@@ -104,6 +103,19 @@ main()
 
 				sleep(50);
 			}
+			break;
+		default:
+			fclose(f);
+			f = open("/dev/volume", ORDWR);
+
+			read (f, buf, sizeof(buf));
+			strtok(buf, " ");
+			ptr = strtok(nil, " ");
+			volume = atoi(ptr);
+
+			redraw(screen);
+
+			break;
 		}
 	}
 }
