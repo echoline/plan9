@@ -37,7 +37,6 @@ LIBS=\
 
 
 CMDS=cmd\
-	games\
 
 SUBSYS=ape\
 	/acme\
